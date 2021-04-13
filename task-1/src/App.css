@@ -1,4 +1,52 @@
-.App {
+.Border{
+  border : solid 2px black;
+  padding : 30px;
+  margin: 30px 100px 0px 100px;
+}
+
+.red{
+  color: red;
+}
+#middle{
+  text-align: center;
+}
+
+.show{
+  display: block;
+}
+
+.hide{
+  display: none;
+}
+
+
+.width{
+  width: 100%;
+}
+
+.rightcorner2{
+  margin : 0px 0px 0px 930px;     
+}
+
+.rightcorner{
+  margin : 0px 0px 0px 830px;     
+}
+
+.leftcorner{
+  margin: 0px 0px 0px 0px;
+}
+
+.inline{
+    display: inline-flex;
+}
+
+h2{
+  font-weight: bold;
+}
+
+
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +83,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

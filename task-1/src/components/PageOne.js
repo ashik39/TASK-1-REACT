@@ -1,4 +1,5 @@
 import React,{ useState } from 'react'
+import HandleChanges from './HandleChanges'
 
 function PageOne(props){
     const [firstName,setFirstName] = useState('');
@@ -8,18 +9,18 @@ function PageOne(props){
     const [isDisplay1,setIsDisplay1] = useState('');
 
     function change(event){
-        const name = event.target.name;
-        const value = event.target.value;
-        switch (name){
-            case "firstname":
-                setFirstName(value);
-                break;
-            case "lastname":
-                setLastName(value);
-                break;
-            default:
-                return;
-        }
+        // const name = event.target.name;
+        // const value = event.target.value;
+        // switch (name){
+        //     case "firstname":
+        //         setFirstName(value);
+        //         break;
+        //     case "lastname":
+        //         setLastName(value);
+        //         break;
+        //     default:
+        //         return;
+        // }
     }
 
     function validate(){
@@ -64,8 +65,8 @@ function PageOne(props){
             <input type ="text" className="form-control width"
             name="lastname" placeholder="Last Name" value={lastName} onChange = {change}/>                
             <p style = {{color : 'red'}}>{lastNameError}</p>
-
-            <button className="btn btn-primary rightcorner2" type ="submit" value = "NEXT" onClick={submitOne}>NEXT</button>
+            <HandleChanges handleClick={submitOne}/>
+            {/* <button className="btn btn-primary rightcorner2" type ="submit" value = "NEXT" onClick={submitOne}>NEXT</button> */}
         </div>
     )
 }
