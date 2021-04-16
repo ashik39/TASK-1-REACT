@@ -29,104 +29,130 @@ function App() {
       state : "",
       city : ""
     });
-    // const [firstNameError,setFirstNameError] = useState('');
-    // const [lastNameError,setLastNameError] = useState('');
-    // const [emailError,setEmailError] = useState('');
-    // const [phoneError,setPhoneError] = useState('');
-    // const [countryError,setCountryError] = useState('');
-    // const [stateError,setStateError] = useState('');
-    // const [cityError,setCityError] = useState('');
+    
 
     function handleValidate(validationPage,value1,value2,value3){
 
       switch(validationPage){
         case "page1":
-          const firstNameToValidate = value1;
-          const lastNameToValidate = value2;
-
-          if(firstNameToValidate.trim() === '') { setError({firstName:'*First Name cant be blank'})
-            console.log(error.firstName)
-          }
-          else{setError({[firstName]:''});}
-          
-          if(lastNameToValidate.trim() === '') { setError(prevError => ({...prevError,lastName :'*Last Name cant be blank'}))
-          console.log(error.firstName)
-          return false
-          } 
-          else{ setError({[lastName]:''})
-          return true;;} 
-          
-          // if(firstNameToValidate !== '' && lastNameToValidate !== ''){
-            
-          // }
-          // else{
-          //   ;
-          // }
-
-          
+          return validationPage1(value1,value2);
 
         case "page2":
-          const emailToValidate = value1;
-          const phoneToValidate = value2;
+          return validationPage2(value1,value2);
+
+        case "page3":
+          return validationPage3(value1,value2,value3);
+        
+        default:
+          break;
+      }
+
+    }
+
+    function validationPage1(firstName,lastName){
+          const firstNameToValidate = firstName;
+          const lastNameToValidate = lastName;
+          let firstNameStatus;
+          let lastNameStatus;
+          if(firstNameToValidate.trim() === '') { 
+            setError({firstName:'*First Name cant be blank'})
+            //console.log(error.firstName)
+            firstNameStatus = false;
+          }
+          else{
+            setError({[firstName]:''});
+            firstNameStatus = true;
+          }
+          
+          if(lastNameToValidate.trim() === '') { 
+            setError(prevError => ({...prevError,lastName :'*Last Name cant be blank'}))
+            lastNameStatus = false;
+            //console.log(error.firstName)
+          } 
+          else{ 
+            setError({[lastName]:''});
+            lastNameStatus = true;
+          }
+          
+          if(firstNameStatus && lastNameStatus){
+            return true;
+          }
+          else{
+            return false;
+          }
+          
+    }
+
+    function validationPage2(email,phone){
+          const emailToValidate = email;
+          const phoneToValidate = phone;
+          let emailStatus;
+          let phoneStatus;
           if(emailToValidate.trim() === '' || !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(emailToValidate)){
-          setError(prevError => ({...prevError,email:"*Check and enter proper Email ID"}));
+            setError(prevError => ({...prevError,email:"*Check and enter proper Email ID"}));
+            emailStatus = false;
           }
           else{
             setError(prevError => ({...prevError,email:""})) ;
+            emailStatus = true;
           }
 
           if(phoneToValidate.trim() === '' || phoneToValidate.length !== 10){
             setError(prevError => ({...prevError,phone: "*Enter 10 Digit number!"}))
-            return false;
+            phoneStatus = false;
             }
           else{
             setError(prevError => ({...prevError,phone: ""}));
+            phoneStatus = true;
+          }
+
+          if(emailStatus && phoneStatus){
             return true;
           }
-          
-          
-          // if(emailToValidate !== '' && phoneToValidate !== ''){
-            
-          // }
-          // else{
-            
-          // }
+          else{
+            return false;
+          }
+    }
 
-        case "page3":
-          const countryToValidate = value1;
-          const stateToValidate = value2;
-          const cityToValidate = value3;
+    function validationPage3(country,state,city){
+          const countryToValidate = country;
+          const stateToValidate = state;
+          const cityToValidate = city;
 
-          (countryToValidate.trim() === '') ? 
-          setError(prevError => ({...prevError,country : "*Select Country"})) : 
-          setError(prevError => ({...prevError,country : ""}));
-
-          (stateToValidate.trim() === '') ? 
-          setError(prevError => ({...prevError,state : "*Select state"})) : 
-          setError(prevError => ({...prevError,state : ""}));
-
-          if(cityToValidate.trim() === '') {
-          setError(prevError => ({...prevError,city : "*City cant be blank"}))
-          return false;
+          let countryStatus;
+          let stateStatus;
+          let cityStatus;
+          if(countryToValidate.trim() === ''){
+            setError(prevError => ({...prevError,country : "*Select Country"}))
+            countryStatus = false;
           }
           else{ 
-          setError({city : ""})
-          return true;
-          }  
-          // if(error.email === '' && error.phone === ''){
-          //   
-            
-          // }
-          // else{
-          //  
-          // }
-          
-        
-        default:
+            setError(prevError => ({...prevError,country : ""}));
+            countryStatus = true;
+          }
+          if(stateToValidate.trim() === ''){
+            setError(prevError => ({...prevError,state : "*Select state"}));
+            stateStatus = false;
+          }
+          else{
+            setError(prevError => ({...prevError,state : ""}));
+            stateStatus = true;
+          }
+          if(cityToValidate.trim() === '') {
+          setError(prevError => ({...prevError,city : "*City cant be blank"}));
+          cityStatus = false;
+          }
+          else{ 
+          setError({city : ""});
+          cityStatus = true;
+          }
 
-          break;
-      }
-
+          if(countryStatus && stateStatus && cityStatus){
+            return true;
+          }
+          else{
+            return false;
+          }
     }
 
     function fullName(nameFirst,nameLast,hidePage1){
