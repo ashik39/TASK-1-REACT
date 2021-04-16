@@ -185,35 +185,35 @@ function App() {
     <div className="Border">
 
       <div>
-      { activePage === 'page1' ? <PageOne  
+      { activePage === 'page1' && <PageOne  
       getFullName={fullName} 
       validatePage1={handleValidate} 
       firstNameError={error.firstName}
-      lastNameError={error.lastName}/> : null}
+      lastNameError={error.lastName}/>}
         
       </div>
       
       <div>
-      { activePage === 'page2' ? <PageTwo 
+      { activePage === 'page2' && <PageTwo 
       getContact={contact} 
       back={backToPage1} 
       validatePage2={handleValidate}
       emailError={error.email}
-      phoneError={error.phone}/> : null }
+      phoneError={error.phone}/>}
       </div>
 
       <div>
-      { activePage === 'page3' ? <PageThree 
+      { activePage === 'page3' && <PageThree 
       getLocation={location} 
       back={backToPage2} 
       validatePage3={handleValidate} 
       countryError = {error.country}
       stateError = {error.state}
-      cityError = {error.city}/> : null}
+      cityError = {error.city}/>}
       </div>
 
       <div>
-        { activePage === 'page4' ?
+        { activePage === 'page4'&&
           <div>
             <div id ="middle">
             <h2>Details</h2>
@@ -228,7 +228,6 @@ function App() {
             <br/>
             <button className="btn btn-primary leftcorner" type ="submit" value = "PREVIOUS" onClick ={backToPage3}>PREVIOUS</button>
             </div> 
-            : null
       }
       </div>
     </div>
