@@ -4,18 +4,16 @@ function PageOne(props){
     const [firstName,setFirstName] = useState('');
     const [lastName,setLastName] = useState('');
     
-    const [isDisplayPage1,setIsDisplayPage1] = useState();
+    const [pageStatus,setPageStatus] = useState('page2');
 
     function submitOne(){
 
         const isValidate = props.validatePage1('page1',firstName,lastName);
-        console.log(isValidate)
         if(isValidate){
-            props.getFullName(firstName,lastName,isDisplayPage1)
-            setIsDisplayPage1(false)
+            setPageStatus('page2');
+            props.getFullName(firstName,lastName,pageStatus);
         }        
     }
-
 
     return(
         <div className="pageone">
@@ -38,42 +36,3 @@ function PageOne(props){
 }
 
 export default PageOne
-    //const [isDisplayPage1,setIsDisplayPage1] = useState('');
-
-    // function change(event){
-    //     const name = event.target.name;
-    //     const value = event.target.value;
-    //     switch (name){
-    //         case "firstname":
-    //             setFirstName(value);
-    //             break;
-    //         case "lastname":
-    //             setLastName(value);
-    //             break;
-    //         default:
-    //             return;
-    //     }
-    // }
-
-    // function validate(){
-        
-    //     if (firstName.trim() === ''){
-    //         setFirstNameError('*First Name cant be blank');
-    //     }
-    //     else{
-    //         setFirstNameError(''); 
-    //     }
-
-    //     if (lastName.trim() === ''){
-    //         setLastNameError('*Last Name cant be blank');
-    //         return false;
-    //     }
-    //     else{
-    //         setLastNameError(''); 
-    //         return true;
-    //     }
-    // }
-
-
-
-

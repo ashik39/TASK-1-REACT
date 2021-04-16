@@ -5,66 +5,20 @@ function  PageThree(props){
     const [state,setState] = useState('');
     const [city,setCity] = useState('');
     
-    const [isDisplayPage3,setIsDisplayPage3] = useState();
-//    const [isDisplay3,setIsDisplay3] = useState();
-
-    // function change3(event){
-    //     const name = event.target.name;
-    //     const value = event.target.value;
-    //     switch (name){
-    //         case "country":
-    //             setCountry(value);
-    //             break;
-    //         case "state":
-    //             setState(value);
-    //             break;
-    //         case "city":
-    //             setCity(value);
-    //             break;
-    //         default:
-    //             return;
-    //     }
-    // }
-
-    // function validate3(){
-        
-    //     if (country.trim() === ''){
-    //         setCountryError('*Select Country');
-    //     }
-    //     else{
-    //         setCountryError(''); 
-    //     }
-
-    //     if (state.trim() === ''){
-    //         setStateError('*Select state');
-    //     }
-    //     else{
-    //         setStateError(''); 
-    //     }
-
-    //     if (city.trim() === ''){
-    //         setCityError('*City cant be blank');
-    //         return false;
-    //     }
-    //     else{
-    //         setCityError(''); 
-    //         return true;
-    //     }
-    // }
+    const [pageStatus,setPageStatus] = useState('page4');
 
     function submitThree(event){
         
         event.preventDefault();
         const isValidate = props.validatePage3('page3',country,state,city);
         if(isValidate){
-            setIsDisplayPage3(true)
-            props.getLocation(country,state,city,isDisplayPage3)
+            setPageStatus('page4');
+            props.getLocation(country,state,city,pageStatus);
         }        
     }
 
     function goBack(){
-        setIsDisplayPage3(false)
-        props.back(true)
+        props.back('page2');
     }
 
     return(

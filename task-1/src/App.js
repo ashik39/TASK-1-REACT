@@ -5,8 +5,8 @@ import PageThree from './components/PageThree'
 import './App.css';
 function App() {
 
-    const [firstName,setFirstName] = useState('')
-    const [lastName,setLastName] = useState('')
+    const [firstName,setFirstName] = useState('');
+    const [lastName,setLastName] = useState('');
     
     const [email,setEmail] = useState('');
     const [phone,setPhone] = useState('');
@@ -15,10 +15,7 @@ function App() {
     const [state,setState] = useState('');
     const [city,setCity] = useState('');
 
-    const [page1,setPage1] = useState(true)
-    const [page2,setPage2] = useState(false)
-    const [page3,setPage3] = useState(false)
-    const [page4,setPage4] = useState(false)
+    const [activePage,setActivePage] = useState('page1');
 
     const [error, setError] = useState({
       firstName: "", 
@@ -55,22 +52,20 @@ function App() {
           let firstNameStatus;
           let lastNameStatus;
           if(firstNameToValidate.trim() === '') { 
-            setError({firstName:'*First Name cant be blank'})
-            //console.log(error.firstName)
+            setError({firstName:'*First Name cant be blank'});
             firstNameStatus = false;
           }
           else{
-            setError({[firstName]:''});
+            setError(prevError => ({...prevError,firstName:''}));
             firstNameStatus = true;
           }
           
           if(lastNameToValidate.trim() === '') { 
-            setError(prevError => ({...prevError,lastName :'*Last Name cant be blank'}))
+            setError(prevError => ({...prevError,lastName :'*Last Name cant be blank'}));
             lastNameStatus = false;
-            //console.log(error.firstName)
           } 
           else{ 
-            setError({[lastName]:''});
+            setError(prevError => ({...prevError,lastName:''}));
             lastNameStatus = true;
           }
           
@@ -98,7 +93,7 @@ function App() {
           }
 
           if(phoneToValidate.trim() === '' || phoneToValidate.length !== 10){
-            setError(prevError => ({...prevError,phone: "*Enter 10 Digit number!"}))
+            setError(prevError => ({...prevError,phone: "*Enter 10 Digit number!"}));
             phoneStatus = false;
             }
           else{
@@ -143,7 +138,7 @@ function App() {
           cityStatus = false;
           }
           else{ 
-          setError({city : ""});
+          setError(prevError => ({...prevError,city : ""}));
           cityStatus = true;
           }
 
@@ -156,56 +151,50 @@ function App() {
     }
 
     function fullName(nameFirst,nameLast,hidePage1){
-    setFirstName(nameFirst)
-    setLastName(nameLast)
-    setPage1(hidePage1)
-    setPage2(true)
+    setFirstName(nameFirst);
+    setLastName(nameLast);
+    setActivePage(hidePage1);
     }
 
-    function contact(email,phone,showPage2){
-      setEmail(email)
-      setPhone(phone)
-      setPage2(showPage2)
-      setPage3(true)
+    function contact(email,phone,showPage3){
+      setEmail(email);
+      setPhone(phone);
+      setActivePage(showPage3);
     }
 
-    function location(country,state,city,showPage3){
-      setCountry(country)
-      setState(state)
-      setCity(city)
-      setPage3(showPage3)
-      setPage4(true)
+    function location(country,state,city,showPage4){
+      setCountry(country);
+      setState(state);
+      setCity(city);
+      setActivePage(showPage4);
     }
 
     function backToPage3(){
-      setPage4(false)
-      setPage3(true)
+      setActivePage('page3');
     }
 
     function backToPage2(showPage2){
-      setPage3(false)
-      setPage2(showPage2)
+      setActivePage(showPage2);
     }
 
     function backToPage1(showPage1){
-      setPage2(false)
-      setPage1(showPage1)
+      setActivePage(showPage1);
     }
 
   return (
     <div className="Border">
 
       <div>
-      { page1 ? <PageOne  
+      { activePage === 'page1' ? <PageOne  
       getFullName={fullName} 
       validatePage1={handleValidate} 
       firstNameError={error.firstName}
-      lastNameError={error.lastName}/> : null }
+      lastNameError={error.lastName}/> : null}
         
       </div>
       
       <div>
-      { page2 ? <PageTwo 
+      { activePage === 'page2' ? <PageTwo 
       getContact={contact} 
       back={backToPage1} 
       validatePage2={handleValidate}
@@ -214,17 +203,17 @@ function App() {
       </div>
 
       <div>
-      { page3 ? <PageThree 
+      { activePage === 'page3' ? <PageThree 
       getLocation={location} 
       back={backToPage2} 
       validatePage3={handleValidate} 
       countryError = {error.country}
       stateError = {error.state}
-      cityError = {error.city}/> : null }
+      cityError = {error.city}/> : null}
       </div>
 
       <div>
-        {page4  ? 
+        { activePage === 'page4' ?
           <div>
             <div id ="middle">
             <h2>Details</h2>
@@ -242,22 +231,6 @@ function App() {
             : null
       }
       </div>
-
-
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
     </div>
   );
 }
