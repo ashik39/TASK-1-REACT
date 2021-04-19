@@ -4,15 +4,12 @@ function PageTwo(props){
     const [email,setEmail] = useState('');
     const [phone,setPhone] = useState('');
 
-    const [pageStatus,setPageStatus] = useState('page3');
-
     function submitTwo(event){
         
         event.preventDefault();
         const isValidate = props.validatePage2('page2',email,phone);
         if(isValidate){
-            setPageStatus('page3');
-            props.getContact(email,phone,pageStatus);
+            props.getContact(email,phone,'page3');
         }
     }
 

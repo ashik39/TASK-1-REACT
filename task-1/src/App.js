@@ -28,7 +28,7 @@ function App() {
     });
     
 
-    function handleValidate(validationPage,value1,value2,value3){
+    const handleValidate = (validationPage,value1,value2,value3) => {
 
       switch(validationPage){
         case "page1":
@@ -46,7 +46,7 @@ function App() {
 
     }
 
-    function validationPage1(firstName,lastName){
+    const validationPage1 = (firstName,lastName) => {
           const firstNameToValidate = firstName;
           const lastNameToValidate = lastName;
           let firstNameStatus;
@@ -78,7 +78,7 @@ function App() {
           
     }
 
-    function validationPage2(email,phone){
+    const validationPage2 = (email,phone) => {
           const emailToValidate = email;
           const phoneToValidate = phone;
           let emailStatus;
@@ -109,7 +109,7 @@ function App() {
           }
     }
 
-    function validationPage3(country,state,city){
+    const validationPage3 = (country,state,city) => {
           const countryToValidate = country;
           const stateToValidate = state;
           const cityToValidate = city;
@@ -150,34 +150,34 @@ function App() {
           }
     }
 
-    function fullName(nameFirst,nameLast,hidePage1){
+    const fullName = (nameFirst,nameLast,hidePage1) => {
     setFirstName(nameFirst);
     setLastName(nameLast);
     setActivePage(hidePage1);
     }
 
-    function contact(email,phone,showPage3){
+    const contact = (email,phone,showPage3) => {
       setEmail(email);
       setPhone(phone);
       setActivePage(showPage3);
     }
 
-    function location(country,state,city,showPage4){
+    const location = (country,state,city,showPage4) => {
       setCountry(country);
       setState(state);
       setCity(city);
       setActivePage(showPage4);
     }
 
-    function backToPage3(){
+    const backToPage3 = () => {
       setActivePage('page3');
     }
 
-    function backToPage2(showPage2){
+    const backToPage2 = (showPage2) => {
       setActivePage(showPage2);
     }
 
-    function backToPage1(showPage1){
+    const backToPage1 = (showPage1) => {
       setActivePage(showPage1);
     }
 

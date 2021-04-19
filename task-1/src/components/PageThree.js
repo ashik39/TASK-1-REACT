@@ -1,19 +1,34 @@
 import React, { useState } from 'react'
 
 function  PageThree(props){
-    const [country,setCountry] = useState('');
+
+    const countryOptions = [
+        {
+           id : 1, label: "SELECT" , value : ""
+        },
+        {
+            id : 2, label : "INDIA" , value : "INDIA"
+        },
+        {
+            id : 3, label : "AUSTRALIA" , value : "AUSTRALIA"
+        },
+        {
+            id : 4, label : "RUSSIA" , value : "RUSSIA"
+        },
+        {
+            id : 5, label : "USA" , value : "USA"
+        }]
+    const [country,setCountry] = useState(countryOptions[0]);
     const [state,setState] = useState('');
     const [city,setCity] = useState('');
-    
-    const [pageStatus,setPageStatus] = useState('page4');
 
     function submitThree(event){
         
         event.preventDefault();
+        console.log(country);
         const isValidate = props.validatePage3('page3',country,state,city);
         if(isValidate){
-            setPageStatus('page4');
-            props.getLocation(country,state,city,pageStatus);
+            props.getLocation(country,state,city,'page4');
         }        
     }
 
@@ -26,12 +41,18 @@ function  PageThree(props){
             <h2 id ="middle">Step - 3</h2>
                 
                 <label>Country : </label>
-                <select className="form-select width" name="country" value={country} onChange = {(e)=>setCountry(e.target.value)}>
-                    <option value = "">SELECT</option>
+                <select className="form-select width" name="country" value={country} onChange = {(e)=>setCountry(countryOptions.find( option => option.id === e.target.value) )}>
+                    {countryOptions.map( option => (
+                        <option key={option.id} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                    
+                    {/* <option value = "">SELECT</option>
                     <option value = "INDIA">INDIA</option>
                     <option value = "AUSTRALIA">AUSTRALIA</option>
                     <option value = "RUSSIA">RUSSIA</option>
-                    <option value = "USA">USA</option>
+                    <option value = "USA">USA</option> */}
                 </select>
                 <p className="red">{props.countryError}</p><br/>
 
